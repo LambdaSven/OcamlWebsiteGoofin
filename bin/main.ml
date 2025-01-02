@@ -1,5 +1,22 @@
 let number = ref 0
 
+(* File into raw MD string *)
+let md_to_string year title = 
+  let ic = "blogs/" ^ year ^ "/" ^ title in
+  let open Core in
+  In_channel.read_all ic
+
+(* Raw HTML String *)
+let get_blog year title = 
+ let open Omd in
+ let file = md_to_string year title in
+ to_html @@ of_string file
+
+(*HTML String into Tyxml object *)
+let content year title = 
+  let s_html = get_blog year title in
+  [%html s_html]
+
 let l_link = 
   let open Tyxml.Html in 
    a ~a:[a_href "/ily"] [txt "Hey, Guess What?"]
@@ -36,7 +53,7 @@ let ht_button_update =
     [txt "Update!"]
 
 let count = 
-  let open Tyxml.Html in
+  let open Tyxml.Html in 
   p ~a:[a_id "count"] [txt @@ string_of_int !number]
 
 let counter = 
@@ -86,5 +103,9 @@ let () =
     );
     Dream.get "/update" (
       fun _ -> Dream.html @@ string_of_int !number
+      );
+    Dream.get "/:year/:title" (
+       fun request -> 
+        Dream.html @@ content (Dream.param request "year") (Dream.param request "title")
       )
   ]

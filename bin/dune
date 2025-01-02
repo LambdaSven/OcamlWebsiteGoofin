@@ -1,4 +1,5 @@
 (executable
  (public_name WebOcaml)
  (name main)
- (libraries dream tyxml WebOcaml))
+ (libraries core dream tyxml omd WebOcaml)
+ (preprocess (pps tyxml-ppx)))
