@@ -24,6 +24,15 @@ let l_link =
 let htmx_script = 
   let open Tyxml.Html in
   script ~a:[a_src "https://unpkg.com/htmx.org@2.0.4"] (txt "")
+(*
+let highlight_script = 
+  let open Tyxml.Html in
+    link ~a:[a_rel [`Stylesheet]; a_href "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"]
+
+let highlight_js = 
+ let open Tyxml.Html in
+    script ~a:[a_src "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"] (txt "") 
+*)
 
 let ht_button_Increase =
   let open Tyxml.Html in 
