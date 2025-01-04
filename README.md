@@ -15,7 +15,9 @@ This project requires the following dependencies
 
 Dream
 Tyxml
+Tyxml-ppx
 Omd
+Core
 
 Additionally, if you're working on it you should also install 
 
@@ -23,4 +25,4 @@ ocaml-lsp-server
 
 You can instal all of the above with the following command.
 
-`opam install dream tyxml ocaml-lsp-server omd`
+`opam install dream tyxml tyxml-ppx ocaml-lsp-server omd`

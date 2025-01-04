@@ -19,7 +19,7 @@
  (name WebOcaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune dream tyxml omd)
+ (depends ocaml dune dream tyxml tyxml-ppx omd)
  (tags
   (topics "to describe" your project)))
 

@@ -55,7 +55,7 @@ let ht_button_update =
   let open Tyxml.Html in
   button ~a:[
     Unsafe.string_attrib "hx-get" "/update";
-    Unsafe.string_attrib "hx-trigger" "load, every 1s";
+    (* Unsafe.string_attrib "hx-trigger" "load(*, every 1s"; *)
     Unsafe.string_attrib "hx-target" "#count";
     Unsafe.string_attrib "hx-swap" "textContent"
   ]
@@ -85,7 +85,7 @@ let elt_to_string elt = Fmt.str "%a" (Tyxml.Html.pp_elt ()) elt
 
 
 let () =
-  Dream.run ~interface:"192.168.0.106"
+  Dream.run (* ~interface:"192.168.0.106" *)
   @@ Dream.logger
   @@ Dream.router [
     Dream.get "/" (
