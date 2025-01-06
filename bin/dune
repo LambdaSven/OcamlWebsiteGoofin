@@ -1,5 +1,5 @@
 (executable
  (public_name WebOcaml)
  (name main)
- (libraries core dream tyxml omd WebOcaml)
+ (libraries sqlite3 core dream tyxml omd WebOcaml)
  (preprocess (pps tyxml-ppx)))

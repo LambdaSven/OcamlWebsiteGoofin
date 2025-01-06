@@ -1,8 +1,32 @@
+let db = 
+  let open Sqlite3 in 
+  db_open "TestDb.db"
+
+let create_table_sql = "CREATE TABLE words ( \
+                          word TEXT PRIMARY KEY, \
+                          user TEXT NOT NULL \
+                        );"
+
+
+let insert_word word user = Printf.sprintf "INSERT INTO words VALUES ('%s', '%s')" word user 
+
+let () =
+let open Sqlite3 in
+  match exec db create_table_sql with
+  | Rc.OK -> print_endline "Ok"
+  | r -> prerr_endline (Rc.to_string r); prerr_endline (errmsg db)
+
+let () =
+  let open Sqlite3 in
+  match exec db (insert_word "Test Word" "Ahh") with
+  | Rc.OK -> print_endline "Ok"
+  | r -> prerr_endline (Rc.to_string r); prerr_endline (errmsg db)
+
 let number = ref 0
 
 (* File into raw MD string *)
 let md_to_string year title = 
-  let ic = "blogs/" ^ year ^ "/" ^ title in
+  let ic = "blogs/" ^ year ^ "/" ^ title ^ ".md" in
   let open Core in
   In_channel.read_all ic
 
