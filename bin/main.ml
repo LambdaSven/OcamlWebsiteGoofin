@@ -8,7 +8,7 @@ let create_table_sql = "CREATE TABLE words ( \
                         );"
 
 
-let insert_word word user = Printf.sprintf "INSERT INTO words VALUES ('%s', '%s')" word user 
+let insert_word word user db = let open Sqlite3 in bind_values (prepare db "INSERT INTO words VALUES (?, ?)") [Data.opt_text word; Data.opt_text user] 
 
 let () =
 let open Sqlite3 in
@@ -18,7 +18,7 @@ let open Sqlite3 in
 
 let () =
   let open Sqlite3 in
-  match exec db (insert_word "Test Word" "Ahh") with
+  match step (insert_word (Some "Test Word") (Some "Ahh") db) with (*TODO: Fix this*)
   | Rc.OK -> print_endline "Ok"
   | r -> prerr_endline (Rc.to_string r); prerr_endline (errmsg db)
 
